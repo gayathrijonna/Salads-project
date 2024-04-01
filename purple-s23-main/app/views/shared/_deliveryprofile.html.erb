@@ -1,0 +1,27 @@
+<div class="card col-5 mx-5 my-3" style="min-height: 120px ">
+  <div class="card-body text-center">
+    <span class='row d-flex flex-row'>
+        <h3 class='card-title text-decoration-underline float-start text-start col-10 p-0'> <%= profile.profile_name %> </h3>
+        <span class='float-end col-1 my-auto'>
+            <%# <%= button_to new_product_edit_path, class: 'me-3' do %>
+                <%#i class="bi bi-pencil-square"></i>
+                <% end %>
+            <%# button> %>
+            <%= link_to delete_delivery_profiles_path(profile), method: :delete, class: 'me-3' do %>
+                <i class="bi bi-trash"></i>
+            <% end %>
+        </span>
+    </span>
+    <div class='d-flex flex-column'>
+    <% DeliveryProfileItem.all().where(delivery_profiles_id: profile.id).each do |item| %>
+        <div class='p-3 text-start'>
+            <label class='text-start'> <%= item.salad_name %> </label>
+            <label class='float-end'> <%= item.quantity %> </label>
+        </div>
+    <% end %>
+    </div>
+  </div>
+  <div class='card-footer'>
+        <%= link_to "Add to Cart", cart_delivery_profiles_path(profile), method: :post, remote: true, class: 'btn btn-primary row text-center m-3 float-end' %>
+  </div>
+</div>

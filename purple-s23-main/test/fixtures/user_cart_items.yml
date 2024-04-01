@@ -1,0 +1,34 @@
+# == Schema Information
+#
+# Table name: user_cart_items
+#
+#  id          :bigint           not null, primary key
+#  dressing    :string
+#  price_cents :decimal(, )
+#  quantities  :integer
+#  salad_name  :string
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#  salad_id    :integer
+#  usercart_id :bigint
+#
+# Indexes
+#
+#  index_user_cart_items_on_usercart_id  (usercart_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (usercart_id => usercarts.id)
+#
+
+one:
+  salad_name: MyString
+  quantities: 1
+  price_cents: 9.99
+  dressing: MyString
+
+two:
+  salad_name: MyString
+  quantities: 1
+  price_cents: 9.99
+  dressing: MyString

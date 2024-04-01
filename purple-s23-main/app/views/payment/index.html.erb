@@ -1,0 +1,37 @@
+<html>
+  <head>
+    <title>Payment</title>
+  </head>
+  <body>
+  <div>
+    <%=  bootstrap_form_with model: @payment, url: update_payment_path, method: :post, data: { turbo: false } do |f| %>
+            <div class='row'>
+              <div class='col-6'>
+                <%= f.text_field :cardnumber, label: 'Card Number' %><br>
+              </div>
+              <div class='col-6'>
+                <%= f.text_field :cardholdername, label: 'Cardholder Name' %><br>
+              </div>
+            </div>
+            <div class='row'>
+              <div class='col-6'>
+                <%= f.text_field :emailid, label: 'Email Address' %><br>
+              </div>
+              <div class='col-6'>
+                <%= f.text_field :mobile, label: 'Mobile' %><br>
+              </div>
+            </div>
+            <div class='row'>
+              <div class='col-6'>
+                  <%= f.text_field :address, label: 'Address' %>
+              </div>
+              <div class='col-6 mt-3'>
+                  <%= f.submit 'Save', class: 'btn btn-primary mt-4 px-4'%>
+              </div>
+            </div>
+      <% end %>
+    
+    </div>
+
+    </body>
+    </html>

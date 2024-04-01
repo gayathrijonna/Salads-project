@@ -1,0 +1,53 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<% if current_user.role != 'admin'%>
+  <div class="container-fluid">
+    <%# <%= link_to "Salad Bar", root_path, class: "navbar-brand" %> <%# %>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item me-4 <%= 'active disabled' if current_page?(curated_salads_path) %>">
+          <%= link_to "Curated Salads", curated_salads_path, class: "nav-link" %>
+        </li>
+        <li class="nav-item me-4 <%= 'active disabled' if current_page?(make_my_own_salad_path) %>">
+          <%= link_to "Make My Own Salad", make_my_own_salad_path, class: "nav-link" %>
+        </li>
+        <li class="nav-item me-4 <%= 'active disabled' if current_page?(delivery_profiles_path) %>">
+          <%= link_to "Delivery Profiles", delivery_profiles_path, class: "nav-link" %>
+        </li>
+        <li class="nav-item me-4 <%= 'active disabled' if current_page?(salads_feed_path) %>">
+          <%= link_to "Salads Feed", salads_feed_path, class: "nav-link" %>
+        </li>
+      </ul>
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <%= link_to cart_items_path do %>
+            <span class="navbar-text me-2 d-block">
+              <i class="bi bi-cart nav-link" style='transform: scale(2)'></i>
+            </span>
+          <% end %>
+        </li>   
+        <li class="d-flex nav-item dropdown">
+          <span style='margin-top:16px'>Hi,</span> <%= button_to current_user.email, update_user_profile_path, method: :get, data: { turbo: false }, class:'btn btn-link' %>
+        </li>
+        <li>
+          <%= button_to 'Sign Out', destroy_user_session_path, method: :delete, data: { turbo: false }, class:'btn btn-link' %>
+        </li>
+      </ul>
+    </div>
+  </div>
+<% else %>
+  <div class="container-fluid">
+      <ul class="navbar-nav ms-auto float-end">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Hi, <%= current_user.email %>
+          </a>
+        </li>
+        <li><%= button_to 'Sign Out', destroy_user_session_path, method: :delete, data: { turbo: false }, class:'btn btn-link' %></li>
+      </ul>
+    </div>
+  </div>
+<% end %>
+</nav>

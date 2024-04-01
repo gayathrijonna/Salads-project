@@ -1,0 +1,56 @@
+<h1 class='text-start' style= "align-center"> Products Catalog</h1>
+<div class='d-flex flex-row'>
+    <%# Div for actions %>
+    <div class='container-first salad-ctrl-div' style='width: 20vw; background-color: #ccc'>
+        <%# Filters selected_fruits = params[:fruits] # this will return an array of selected fruits values, e.g. ["apple", "orange"] %>
+        <%= form_tag admin_curated_salads_path, method: :get do %>
+            <div class="form-group m-4">
+                <label class='my-3' style="font-weight: bold;">Dietary Filters:</label>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="salads[]" value="isVegan" id="isVegan" <%='checked' if params[:salads]&.include?('isVegan')%>>
+                    <label class="form-check-label" for="apple">Vegan</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="salads[]" value="isAllGreens" id="isAllGreens" <%='checked' if params[:salads]&.include?('isAllGreens')%>>
+                    <label class="form-check-label" for="banana">All Greens</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="salads[]" value="isAllMeat" id="isAllMeat" <%='checked' if params[:salads]&.include?('isAllMeat')%>>
+                    <label class="form-check-label" for="orange">All Meat</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="salads[]" value="isDiaryDiet" id="isDiaryDiet" <%='checked' if params[:salads]&.include?('isDiaryDiet')%>>
+                    <label class="form-check-label" for="orange">isDiaryDiet</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="salads[]" value="isTropical" id="isTropical" <%='checked' if params[:salads]&.include?('isTropical')%>>
+                    <label class="form-check-label" for="orange">Tropical</label>
+                </div>
+            </div>
+
+            <%# Drop down calories count - calorie_range = params[:calorie_range] %>
+            <div class="input-group m-3">
+                <label class='my-3 w-100' style="font-weight: bold;">Calories:</label>
+                <%= select_tag :calorie_range, options_for_select(["Select","0-250", "250-500", "500-750", "750+"],selected: params[:calorie_range]), include_blank: false ,style: "width:80%" %>
+            </div>
+            <div class='d-flex'>
+                <%= submit_tag 'Apply Filter', class: 'm-3 btn btn-primary btn-pri-sec float-start' %>
+                <%= submit_tag "Clear",  method: :get, class: "row text-center m-3 float-end" %>
+            </div>
+        <% end %>
+
+        <div class="input-group m-3 salads-act-btns">
+            <%= button_to "Add New Salad", new_path, method: :get, class: 'row text-center m-3' %>
+        </div>
+
+
+    </div>
+    <%# Div for displaying Salads %>
+    <div class='container-first' style='width: 80vw; padding-top: 0;'>
+        <div id="salad-list" class='row d-flex flex-row'>
+            <% @curatedsalads.each do |salad| %>
+                <%= render "shared/saladview", salad: salad %>
+            <% end %>
+        </div>
+    </div>
+</div>

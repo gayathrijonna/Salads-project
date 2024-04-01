@@ -1,0 +1,30 @@
+# == Schema Information
+#
+# Table name: delivery_profiles
+#
+#  id           :bigint           not null, primary key
+#  dressings    :integer
+#  price_cents  :integer
+#  profile_name :string
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#  userdata_id  :bigint
+#
+# Indexes
+#
+#  index_delivery_profiles_on_userdata_id  (userdata_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (userdata_id => userdata.id)
+#
+
+one:
+  profile_name: MyString
+  dressings: 1
+  price_cents: 1
+
+two:
+  profile_name: MyString
+  dressings: 1
+  price_cents: 1

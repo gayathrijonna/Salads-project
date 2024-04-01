@@ -1,0 +1,54 @@
+# == Schema Information
+#
+# Table name: user_vitals_and_preferences
+#
+#  id           :bigint           not null, primary key
+#  age          :integer
+#  gender       :string
+#  height       :integer
+#  isAllGreens  :boolean
+#  isAllMeats   :boolean
+#  isBasics     :boolean
+#  isGlutenFree :boolean
+#  isTropical   :boolean
+#  isVegan      :boolean
+#  weight       :integer
+#  weighttobe   :integer
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#  userdata_id  :bigint
+#
+# Indexes
+#
+#  index_user_vitals_and_preferences_on_userdata_id  (userdata_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (userdata_id => userdata.id)
+#
+
+one:
+  gender: MyString
+  age: 1
+  height: 1
+  weight: 1
+  weighttobe: 1
+  isVegan: false
+  isGlutenFree: false
+  isAllGreens: false
+  isAllMeats: false
+  isTropical: false
+  isBasics: false
+
+two:
+  gender: MyString
+  age: 1
+  height: 1
+  weight: 1
+  weighttobe: 1
+  isVegan: false
+  isGlutenFree: false
+  isAllGreens: false
+  isAllMeats: false
+  isTropical: false
+  isBasics: false

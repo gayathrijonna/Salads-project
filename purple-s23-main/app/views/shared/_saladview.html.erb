@@ -1,0 +1,55 @@
+<div class="card salad-container m-1" style="min-height: 200px ">
+  <%#= image_tag salad.image, class="card-img-top", style="", alt=salad.saladName %>
+  <div class="card-body text-center">
+    <% if salad.salad_image.attached? %>
+        <% if current_user.role === 'admin' && !salad.outOfStock%>
+            <label class='salad-quantities'><%= salad.quantities %>  </label>
+        <% else %>
+           <% if current_user.role === 'admin'%>
+                <label class='salad-quantities-ous alert alert-danger'> Out of Stock </label>
+          <% end %>
+        <% end %>
+        <%= image_tag url_for(salad.salad_image), class: "img-fluid", alt: "Salad image" %>
+      <% end %>
+    <h5 class="card-title"><%= salad.saladName %></h5>
+    <h6 class="card-subtitle"><%= salad.saladIngredients %></h6>
+    <span class='mx-2'>
+    </span>
+  </div>
+  <% if current_user.role === 'admin' %>
+    <div class='card-footer'>
+      <span class='d-flex flex-row mx-2'>
+          <label class='w-50'> <%= salad.calories %> Cal </label>
+          <%= link_to 'Nutritions', nutritions_path, target: "_blank",  class: 'w-50 float-end text-end' %>
+      </span>
+      <span>
+        <label class='w-50 text-bold float-start'> Price: <%= number_to_currency(salad.price_cents) %>
+        </label>
+
+<%= link_to delete_path(salad.id), method: :delete, data: { turbo: false }  do %> 
+<i class="bi bi-trash"></i>
+<% end %>
+       
+
+        <%= button_to 'Edit', edit_path(salad.id), method: :get, class: 'btn btn-primary btn-pri-sec float-end' %>
+      </span>
+      </div>
+    <% else %>
+      <div class='card-footer'>
+          <span class='d-flex flex-row mx-2'>
+              <label class='w-50'> <%= salad.calories %> Cal </label>
+              <%= link_to 'Nutritions', nutritions_path, target: "_blank", class: 'w-50 float-end  text-end ' %>
+          </span>
+          <%= form_tag add_to_cart_path(id: salad.id), html: { class: "d-flex" },  method: :post do %>
+            <label class='w-50 text-bold font-weight-bold float-start m-auto mx-0'> Price: <%= number_to_currency(salad.price_cents)%>
+            </label>
+            <% if  salad.quantities === 0 || salad.outOfStock %>
+                <label style="color: red;" >Out of Stock </label>
+            <% else %>
+                <%= number_field_tag 'quantity', 1, min: 1, max: salad.quantities, style:'width:48 px; height:32px;' %>
+            <% end %>
+            <%= submit_tag 'Add', class: 'ms-3 btn btn-primary btn-pri-sec float-end' %>
+          <% end %>
+      </div>
+  <% end %>
+</div>

@@ -1,0 +1,50 @@
+<h1 class='mt-4' style='color: teal; font-weight: bolder; font-family: cursive; font-size: 3rem'>Make your own salad</h1>
+<h2 style='color:teal; font-family:cursive; font-size: 2rem'>Add you ingredients from the following categories</h2>
+<%= form_tag make_my_own_salad_curate_path, method: :post do%>
+<div class='container my-4' style= "max-height: 45vh; overflow:scroll" >
+  <table class="table table-sm table-striped" style="max-width: 100%;">
+      <tr class="nav-item me-4 mmos" style="height:45px">
+          <th>Name</th>
+          <th>Calories</th>
+          <th>Total Fat (g)</th>
+          <th>Protein (g)</th>
+          <th>Carbohydrates (g)</th>
+          <th>Fiber (g)</th>
+          <th>Sugar (g)</th>
+          <th>Add</th>
+          <th></th>
+      </tr>
+      <% @ingredients.each do |ingredient|%>
+        <tr class='mmos' style="height:60px">
+            <td><%= ingredient.iname %></td>
+            <td><%= ingredient.icalorie %></td>
+            <td><%= ingredient.ifat %></td>
+            <td><%= ingredient.iprotein %></td>
+            <td><%= ingredient.icarbo %></td>
+            <td><%= ingredient.icarbo %></td>
+            <td><%= ingredient.icarbo %></td>
+            <td><%= check_box_tag "ingredients[]", ingredient.id %></td>
+            <td class='me-2'><%= link_to 'Nutritions', nutritions_path, target: "_blank", class: 'w-50 text-end ' %></td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+  <div class='m-auto d-block p-5' style="background-color:teal; min-height: 120px; width: 80%">
+      <% if @saladCreation === false%>
+          <label class='me-2'> Name Your Curation </label>
+          <%= text_field_tag :salad_name, nil, placeholder: "Name your curation", style:'width:300px;height:48px; margin-right: 24px'%>
+          <label class='me-2'>Quantities</label>
+          <%= number_field_tag 'quantity', 1, min: 1, max: 5, style:'width:48 px; height:32px; margin-right: 24px;' %>
+          <%= submit_tag "Curate this Salad", id: "submit-button", class: 'btn btn-primary ms-3', style:'height:48px' %>
+      <% else %>
+          <div class='w-50 float-start d-flex flex-column' style='color: white;'>
+              <h5 class='w-100' style="font-size: 1.5rem"><%= @saladName %></h5>
+              <h6 class='w-100' style="font-size: 1rem"> <%= @iString %> </h6>
+              <h6 class='w-100' style="font-size: 0.6rem"> <%= @iCalories %> cal </h6>
+          </div>
+          <div class='w-50 float-end' style='color: white;'>
+            <%= link_to "Promote My Salad", make_my_own_salad_promote_path(@curatedsalad.id), method: :post, class: 'row text-center m-3', style:'width:200px; color: white;' %>
+          </div>
+      <% end %>
+  </div>
+  <% end %>

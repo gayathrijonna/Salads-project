@@ -1,0 +1,51 @@
+<div class='container w-100'>
+    <h1 class='my-5' style='color: teal; font-weight: bolder; font-family: cursive; font-size: 3rem'> Cart Items</h1>
+    <div class='' style='right: 5%; top:30%; position: absolute; height: 140px; width: 450px; background-color: teal; color: white; padding: 1rem'>
+        <%= @userdata.address %>
+    </div>
+    <div class='row'>
+        <% if @cartitems.any? %>
+        <% @cartitems.each do |item| %>
+            <div class="post card w-45 m-4" style='border-color: teal; border-radius:16px;'>
+            <div class='card-body'>
+                <span class='row d-flex flex-row'>
+                    <h3 class='card-title text-decoration-underline float-start text-start col-10 p-0'> <%= item.salad_name %> </h3>
+                    <span class='float-end col-1 my-auto'>
+                        <%= link_to cart_items_delete_path(item), method: :delete, class: 'me-3' do %>
+                            <i class="bi bi-trash"></i>
+                        <% end %>
+                    </span>
+                </span>
+                <p class='card-subtitle'>
+                    <%= item.dressing %>
+                </p>
+                <div class='card-footer' style='background-color: transparent; border: 0'>
+                <span>
+                    <label class='me-2'>Quantities : </label><%= item.quantities %>
+                <span>
+                <span class='float-end font-weight-bold' style='font-weight:bolder'>
+                    <label class='m-2'>Price: </label><%= number_to_currency(item.price_cents * item.quantities) %>
+                <span>
+                </div>
+            </div>
+            </div>
+        <% end %>
+        <% else %>
+        <p>No items found</p>
+        <% end %>
+    </div>
+    <hr style='border-color: teal' />
+    <div class='row w-100 d-block'>
+        <div class='float-start col-6'>
+            <label> Did you want this order to repeat ever? Save it as a profile </label>
+            <%= form_tag create_delivery_profile_path, method: :post do%>
+                <%= text_field_tag :input_box, nil, placeholder: "Enter Delievery Profile Name", style:'width:300px;height:48px'%>
+                <%= submit_tag "Create Delievry Profile", id: "submit-button", class: 'btn btn-primary ms-3', style:'height:48px' %>
+            <% end %>
+        </div>
+        <div class='float-end col-3 d-flex' style='font-weight:bolder'>
+            <span class='m-auto'>Total Price: <%= number_to_currency(@total_order_value) %></span>
+            <%= button_to 'Place Order', payment_path, method: :get, class: 'btn btn-primary m-3' %>
+        </div>
+    </div>
+</div>

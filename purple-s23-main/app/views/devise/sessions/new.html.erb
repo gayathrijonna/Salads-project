@@ -1,0 +1,62 @@
+<html>
+<head>
+   
+    <title>Salads</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+</head>
+<body>
+    <div class='container mt-5'>
+    <div style="display:flex; flex-direction: row">
+      <div style="width: 80%; float:left;">
+          <%= image_tag 'image.jpg', class: 'w-40 shadow-lg d-block mx-auto', style: 'width: 75%; height: auto'%>
+      </div>
+      <div style="width: 20%; float:left; height:400px; margin:50px">
+        
+        <%# Form for sign in %>
+            <h2>Log in</h2>
+
+            <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+              <div class="field">
+                <%= f.label :email %><br />
+                <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+              </div>
+
+              <div class="field">
+                <%= f.label :password %><br />
+                <%= f.password_field :password, autocomplete: "current-password" %>
+              </div>
+
+              <% if devise_mapping.rememberable? %>
+                <div class="field">
+                  <%= f.check_box :remember_me %>
+                  <%= f.label :remember_me %>
+                </div>
+              <% end %>
+
+              <div class="actions">
+                <%= f.submit "Log in" %>
+              </div>
+            <% end %>
+
+            <%= render "devise/shared/links" %>
+
+      </div>
+    </div>
+    <div style=" text-align: left; font-size: 1rem">
+       <p>
+          Welcome, your go-to resource for include salads in your effort to lose weight.
+           We know it might be difficult to lose weight, but we're here to help by providing a variety of 
+           delicious and nutritious salads that will make you feel filled while also limiting your calorie intake. 
+           Our website also offers a range of helpful resources to support your weight loss goals, including nutrition tips, healthy eating guides, and meal planning advice. We are committed to helping you achieve your weight loss goals in a sustainable and healthy way.
+           Check out our menu to see our current offerings, or use our Build Your Own Salad feature to create a personalized salad that meets your unique nutritional needs. 
+Thank you for choosing our salads for weight loss website, and we look forward to supporting you on your weight loss journey.
+      </p>
+    </div>
+    </div>
+</body>
+</html>

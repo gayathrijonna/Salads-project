@@ -1,0 +1,48 @@
+# == Schema Information
+#
+# Table name: ingredients
+#
+#  id           :bigint           not null, primary key
+#  icalorie     :integer
+#  icarbo       :integer
+#  icheck       :boolean
+#  ifat         :integer
+#  iname        :string
+#  iprotein     :integer
+#  isAllGreens  :boolean
+#  isAllMeat    :boolean
+#  isVegan      :boolean
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#  icategory_id :bigint
+#
+# Indexes
+#
+#  index_ingredients_on_icategory_id  (icategory_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (icategory_id => icategories.id)
+#
+
+one:
+  iname: MyString
+  icalorie: 1
+  ifat: 1
+  icarbo: 1
+  iprotein: 1
+  isAllMeat: false
+  isAllGreens: false
+  isVegan: false
+  icheck: false
+
+two:
+  iname: MyString
+  icalorie: 1
+  ifat: 1
+  icarbo: 1
+  iprotein: 1
+  isAllMeat: false
+  isAllGreens: false
+  isVegan: false
+  icheck: false

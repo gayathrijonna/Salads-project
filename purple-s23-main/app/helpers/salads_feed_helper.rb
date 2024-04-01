@@ -1,0 +1,2 @@
+module SaladsFeedHelper
+end

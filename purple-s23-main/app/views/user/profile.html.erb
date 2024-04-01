@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Salads For Weight Loss</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+  </head>
+
+  <body>
+    <%= render 'shared/flash' %>
+    <main role="main" class="container">
+      <%= image_tag("logo.png", alt: "Logo", style: 'width:500px') %>
+      <% if user_signed_in? %>
+        <%= render 'shared/navbar' %>
+      <% end %>
+      <div class="split left">
+        <div class="centered">
+          <h1 class='my-4'>User Profile</h2>
+          <h2 class='mb-3'>Personal Information</h2>
+          <%= bootstrap_form_with model: @userdata, url: update_user_profile_path, method: :post, data: { turbo: false } do |f| %>
+            <div class='row'>
+              <div class='col-6'>
+                <%= f.text_field :firstname, label: 'First Name' %><br>
+              </div>
+              <div class='col-6'>
+                <%= f.text_field :lastname, label: 'last Name' %><br>
+              </div>
+            </div>
+            <div class='row'>
+              <div class='col-6'>
+                <%= f.text_field :emailid, label: 'Email Address' %><br>
+              </div>
+              <div class='col-6'>
+                <%= f.text_field :mobile, label: 'Mobile' %><br>
+              </div>
+            </div>
+            <div class='row'>
+              <div class='col-6'>
+                  <%= f.text_field :address, label: 'Address' %>
+              </div>
+              <div class='col-6 mt-3'>
+                  <%= f.submit 'Save', class: 'btn btn-primary mt-4 px-4'%>
+              </div>
+            </div>
+            <% end %>
+            </div>
+        </div>
+      </div>
+
+      <div class="split right">
+        <div class="centered">
+          <h2>My Health Vitals</h2>
+          <%= bootstrap_form_with model: @uservitals, url: update_user_profile_path, method: :post, data: { turbo: false } do |f| %>
+            <div class='row'>
+              <div class='col-6'>
+                <%= f.text_field :gender, label: 'Gender' %><br>
+              </div>
+              <div class='col-6'>
+                <%= f.text_field :age, label: 'Age' %>
+              </div>
+            </div>
+          <div class='row'>
+            <div class='col-6'>
+              <%= f.text_field :height, label: 'Height (in cms)' %><br>
+            </div>
+            <div class='col-6'>
+              <%= f.text_field :weight, label: 'Weight (in Kgs)' %><br>
+            </div>
+          </div>
+          <div class='row'>
+            <div class='col-6'>
+                <%= f.text_field :weighttobe, label: 'Weight To Be (in Kgs)' %>
+            </div>
+            <div class='col-6 mt-3'>
+                <%= f.submit 'Save' ,class: 'btn btn-primary mt-4 px-4' %>
+            </div>
+          </div>
+          <% end %>
+      </div>
+  </div>
+    </main>
+  </body>
+</html>

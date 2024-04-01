@@ -1,0 +1,59 @@
+<html>
+<head>
+   
+    <title>Salads</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+</head>
+<body>
+    <div class='container mt-5'>
+      <%= image_tag("logo.png", alt: "Logo", style: 'width:500px') %>
+    <div style="display:flex; flex-direction: row">
+      <div style="width: 80%; float:left;">
+          <%= image_tag 'image.jpg', class: 'w-40 shadow-lg d-block mx-auto', style: 'width: 75%; height: auto'%>
+      </div>
+      <div style="width: 20%; float:left; height:400px; margin:50px">
+        <form id="login-form" action="action">
+            <div class="container text-end my-1">
+                <% if user_signed_in? %>
+                  <p>
+                    <%= link_to "Hi, #{current_user.email}", edit_user_registration_path,
+                    class: "#{active_class(edit_user_registration_path)} btn btn-link" %>
+                  </p>
+
+                  <p>
+                    <%= button_to 'Sign Out', destroy_user_session_path,
+                        method: :delete, data: { turbo: false }, class: 'btn btn-primary' %>
+                  </p>
+
+                <% else %>
+                  <p>
+                    <%= link_to 'Login', new_user_session_path,
+                        class: "#{active_class(new_user_session_path)} btn btn-primary" %>
+                  </p>
+                  <p>
+                    <%= link_to 'Sign Up', new_user_registration_path,
+                        class: "#{active_class(new_user_registration_path)} btn btn-primary" %>
+                  </p>
+                <% end %>
+            </div>
+        </form>
+      </div>
+    </div>
+    <div style=" text-align: left; font-size: 1rem">
+       <p>
+          Welcome, your go-to resource for include salads in your effort to lose weight.
+           We know it might be difficult to lose weight, but we're here to help by providing a variety of 
+           delicious and nutritious salads that will make you feel filled while also limiting your calorie intake. 
+           Our website also offers a range of helpful resources to support your weight loss goals, including nutrition tips, healthy eating guides, and meal planning advice. We are committed to helping you achieve your weight loss goals in a sustainable and healthy way.
+           Check out our menu to see our current offerings, or use our Build Your Own Salad feature to create a personalized salad that meets your unique nutritional needs. 
+Thank you for choosing our salads for weight loss website, and we look forward to supporting you on your weight loss journey.
+      </p>
+    </div>
+    </div>
+</body>
+</html>
